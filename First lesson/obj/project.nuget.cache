@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "JduC51nW+QgF8V6xVh1B/TpgRPAmU/8TTNObzILjf+NXpVdtOG+fefzc6Ji1GArZfmo5ziHcCtO7y9MSJEy9GA==",
+  "dgSpecHash": "uxMdmWr1iVI4o5weacegepeAKoKBL6WFEv3N6xTs7Qx+DT2lrEOYIjm+aujJ/vVJNGEnaImoDA/WjwstOQC5Xg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Deshon\\source\\repos\\First lesson\\First lesson\\First lesson.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Deshon\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\Deshon\\.nuget\\packages\\zendeskapi_v2\\3.12.0\\zendeskapi_v2.3.12.0.nupkg.sha512"
+  ],
   "logs": []
 }
