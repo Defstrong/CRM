@@ -1,4 +1,4 @@
-﻿namespace Crm.InputUser.Dto
+﻿namespace First_lesson.CRM.DTO
 {
     public class InputUserDto
     {

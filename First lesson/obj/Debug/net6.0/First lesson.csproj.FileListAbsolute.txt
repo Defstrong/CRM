@@ -13,3 +13,6 @@ C:\Users\Deshon\source\repos\First lesson\First lesson\obj\Debug\net6.0\refint\F
 C:\Users\Deshon\source\repos\First lesson\First lesson\obj\Debug\net6.0\First lesson.pdb
 C:\Users\Deshon\source\repos\First lesson\First lesson\obj\Debug\net6.0\First lesson.genruntimeconfig.cache
 C:\Users\Deshon\source\repos\First lesson\First lesson\obj\Debug\net6.0\ref\First lesson.dll
+C:\Users\Deshon\source\repos\First lesson\First lesson\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Deshon\source\repos\First lesson\First lesson\bin\Debug\net6.0\ZendeskApi_v2.dll
+C:\Users\Deshon\source\repos\First lesson\First lesson\obj\Debug\net6.0\First lesson.csproj.CopyComplete

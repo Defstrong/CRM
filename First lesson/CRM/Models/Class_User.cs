@@ -1,7 +1,7 @@
-﻿using Crm.InputUser.Dto;
-using UserServices;
+﻿using First_lesson.CRM.DTO;
+using First_lesson.CRM.Services;
 
-namespace Class_User
+namespace First_lesson.CRM.Models
 {
     public class User
     {
@@ -13,8 +13,9 @@ namespace Class_User
         public string Login { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
-
-        public User( InputUserDto classInputUser, string role)
+        public string UserStatus { get; set; }
+        public string UserStatusDuty { get; set; }
+        public User(InputUserDto classInputUser, string role)
         {
             string date;
             FirstName = classInputUser.FirstName;
@@ -28,7 +29,7 @@ namespace Class_User
         }
         public override string ToString()
         {
-            return $"First Name: {FirstName}\nLast Name: {LastName}\nPatronymic:{Patronymic}\n"+
+            return $"First Name: {FirstName}\nLast Name: {LastName}\nPatronymic:{Patronymic}\n" +
                     $"Age: {Age} \nDate of Birth: {DateOfBirth.ToString("dd.MM.yyyy")}\n";
         }
     }

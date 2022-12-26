@@ -1,13 +1,20 @@
-﻿using Class_User;
-using Crm.InputUser.Dto;
-using UserRol;
-using UserServices;
+﻿using First_lesson.CRM.DTO;
+using First_lesson.CRM.Services;
+using First_lesson.CRM.Models;
+using First_lesson.CRM.Services;
+using First_lesson.CRM.Enums;
 
-
+var _usersRequestsForGetMoney = new List<ManagerServices>();
 var _usersList = new List<User>();
 var _requests = new List<User>();
+var _refuseRequests = new List<User>();
 
+
+
+var _creatorServices = new CreatorServices();
+var Method = new ClassMethods();
 var _inputDto = new InputUserDto();
+
 
 _usersList.Add(new User(
     new InputUserDto { 
@@ -27,7 +34,7 @@ _usersList.Add(new User(
     Patronymic = "Grand", 
     Age = 18, 
     DateOfBirth = new DateTime(2004, 08, 12), 
-    Login = "AdminBob", 
+    Login = "Bob", 
     Password = "1111" }, 
     Rols.User.ToString()));
 
@@ -54,26 +61,38 @@ var _inputPassword = string.Empty;
 var _role = string.Empty;
 int i = 0;
 
-var Method = new ClassMethods();
 
-while (++i < 100)
+while (ClassMethods.inputTeg != "Exit")
 {
+    _creatorServices.GeneralAccessSetCreatorServices(ref _usersList);
+
+    Method.GeneralAccessSetUserServices(
+        ref _usersList,
+        ref _requests,
+        ref _refuseRequests,
+        ref _usersRequestsForGetMoney
+        ) ;
+
     Console.WriteLine("\t\t\tTEGS");
-    Console.WriteLine("Registration\tLogin\tGuest\tCreate Admin\tExit");
+    Console.WriteLine("Registration\tLogin\tGuest\tCreate Admin\t Count accepted users\t Count refuse users\tExit");
     ClassMethods.inputTeg = Console.ReadLine();
 
-    if (ClassMethods.inputTeg == "Exit") break;
+    if(ClassMethods.inputTeg == "Count accepted users")
+        Console.WriteLine($"\n\t\t\tCount accepter users: {ModerServices.countAcceptRequest}\n");
+
+    if (ClassMethods.inputTeg == "Count refuse users")
+        Console.WriteLine($"\n\t\t\tCount refuse users: {ModerServices.countRefuseRequest}\n");
 
     if (ClassMethods.inputTeg == "Registration")
-        Method.Registration(ref _inputDto, ref _requests);
+        Method.Registration(ref _inputDto);
 
     if (ClassMethods.inputTeg == "Login")
+    {
         Method.Login(
             _inputLogin,
             _inputPassword,
-            ref _inputDto, 
-            ref _usersList, 
-            ref _requests);
+            ref _inputDto);
+    }
 
     if (ClassMethods.inputTeg == "Guest")
     {
@@ -83,7 +102,6 @@ while (++i < 100)
     }
 
     if (ClassMethods.inputTeg == "Create Admin")
-        Method.CreateAdmin(_usersList);
-
+        Method.CreateAdmin();
 
 }
