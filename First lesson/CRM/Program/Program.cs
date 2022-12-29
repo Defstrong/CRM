@@ -3,16 +3,18 @@ using First_lesson.CRM.Services;
 using First_lesson.CRM.Models;
 using First_lesson.CRM.Services;
 using First_lesson.CRM.Enums;
+using System.Collections.Generic;
 
 var _usersRequestsForGetMoney = new List<ManagerServices>();
 var _usersList = new List<User>();
 var _requests = new List<User>();
-var _refuseRequests = new List<User>();
 
 
 
-var _creatorServices = new CreatorServices();
-var Method = new ClassMethods();
+var _creatorServices = new CreatorServices(ref _usersList);
+var Method = new ClassMethods(ref _usersList,
+            ref _requests,
+            ref _usersRequestsForGetMoney);
 var _inputDto = new InputUserDto();
 
 
@@ -25,7 +27,7 @@ _usersList.Add(new User(
     DateOfBirth = new DateTime(2000, 12, 4), 
     Login = "Admin", 
     Password = "admin" }, 
-    Rols.Admin.ToString()));
+    Roles.Admin));
 
 _usersList.Add(new User(
     new InputUserDto { 
@@ -36,7 +38,7 @@ _usersList.Add(new User(
     DateOfBirth = new DateTime(2004, 08, 12), 
     Login = "Bob", 
     Password = "1111" }, 
-    Rols.User.ToString()));
+    Roles.User));
 
 _usersList.Add(new User(
     new InputUserDto
@@ -49,7 +51,7 @@ _usersList.Add(new User(
     Login = "Alis",
     Password = "1111"
 },
-    Rols.User.ToString()));
+    Roles.User));
 
 var _inputFirstName = string.Empty;
 var _inputLastName = string.Empty;
@@ -64,14 +66,6 @@ int i = 0;
 
 while (ClassMethods.inputTeg != "Exit")
 {
-    _creatorServices.GeneralAccessSetCreatorServices(ref _usersList);
-
-    Method.GeneralAccessSetUserServices(
-        ref _usersList,
-        ref _requests,
-        ref _refuseRequests,
-        ref _usersRequestsForGetMoney
-        ) ;
 
     Console.WriteLine("\t\t\tTEGS");
     Console.WriteLine("Registration\tLogin\tGuest\tCreate Admin\t Count accepted users\t Count refuse users\tExit");
