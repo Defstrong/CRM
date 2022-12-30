@@ -18,10 +18,12 @@ namespace First_lesson.CRM.Services
         private const string moderName = "Moder";
         private const string moderPassword = "Moder";
         private static int numberRequest;
+        public static string massage;
         Roles userRole;
 
-        public static List<ManagerServices> listRequestsForGetMoney = new List<ManagerServices>();
+        public static List<GetMoney> listRequestsForGetMoney = new List<GetMoney>();
         public static List<User> usersList = new List<User>();
         public static List<User> requests = new List<User>();
+        public static List<Massage> massages = new List<Massage>();
     }
 }

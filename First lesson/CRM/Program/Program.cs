@@ -5,7 +5,7 @@ using First_lesson.CRM.Services;
 using First_lesson.CRM.Enums;
 using System.Collections.Generic;
 
-var _usersRequestsForGetMoney = new List<ManagerServices>();
+var _usersRequestsForGetMoney = new List<GetMoney>();
 var _usersList = new List<User>();
 var _requests = new List<User>();
 
@@ -83,8 +83,6 @@ while (ClassMethods.inputTeg != "Exit")
     if (ClassMethods.inputTeg == "Login")
     {
         Method.Login(
-            _inputLogin,
-            _inputPassword,
             ref _inputDto);
     }
 

@@ -1,5 +1,7 @@
 ﻿using First_lesson.CRM.Models;
 using First_lesson.CRM.Enums;
+using First_lesson.CRM.Services;
+
 
 namespace First_lesson.CRM.Services
 {
@@ -49,8 +51,8 @@ namespace First_lesson.CRM.Services
                         indexes.Add(i);
                     }
                 }
-                for(int i = 0; i < requests.Count; i++)
-                    requests.Remove(requests[i]);
+                    for (int i = 0; i < requests.Count; i++)
+                        requests.Remove(requests[i]);
             }
         }
     }

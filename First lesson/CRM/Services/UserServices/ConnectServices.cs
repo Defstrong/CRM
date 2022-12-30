@@ -10,7 +10,7 @@ namespace First_lesson.CRM.Services
         public ClassMethods(
             ref List<User> UsersList, 
             ref List<User> Requests, 
-            ref List<ManagerServices> ListRequestsForGetMoney)
+            ref List<GetMoney> ListRequestsForGetMoney)
         {
             usersList = UsersList;
             requests = Requests;

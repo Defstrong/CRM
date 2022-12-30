@@ -7,5 +7,6 @@
         Creator,
         Guest,
         Moderator,
+        Manager
     }
 }
