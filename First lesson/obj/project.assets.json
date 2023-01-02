@@ -86,11 +86,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Deshon\\Source\\Repos\\CRM\\First lesson\\First lesson.csproj",
       "projectName": "First lesson",
       "projectPath": "C:\\Users\\Deshon\\Source\\Repos\\CRM\\First lesson\\First lesson.csproj",
       "packagesPath": "C:\\Users\\Deshon\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Deshon\\Source\\Repos\\CRM\\First lesson\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\Deshon\\Desktop\\SZd\\First lesson\\First lesson.csproj",
+      "projectName": "First lesson",
+      "projectPath": "C:\\Users\\Deshon\\Desktop\\SZd\\First lesson\\First lesson.csproj",
+      "packagesPath": "C:\\Users\\Deshon\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Deshon\\Desktop\\SZd\\First lesson\\obj\\",
+>>>>>>> 3b4a072bdf0f7eb739b0eed1c6324e3d7c22a0b9
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Deshon\\AppData\\Roaming\\NuGet\\NuGet.Config",

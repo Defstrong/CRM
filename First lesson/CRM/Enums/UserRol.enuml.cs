@@ -1,11 +1,12 @@
 ﻿namespace First_lesson.CRM.Enums
 {
-    enum Rols
+    public enum Roles
     {
         Admin,
         User,
         Creator,
         Guest,
         Moderator,
+        Manager
     }
 }

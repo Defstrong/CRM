@@ -1,5 +1,6 @@
 ﻿using First_lesson.CRM.DTO;
 using First_lesson.CRM.Services;
+using First_lesson.CRM.Enums;
 
 namespace First_lesson.CRM.Models
 {
@@ -12,9 +13,9 @@ namespace First_lesson.CRM.Models
         public DateTime DateOfBirth { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public string Role { get; set; }
+        public Roles Role { get; set; }
 
-        public ClassAdmin(InputUserDto classInputUser, string role)
+        public ClassAdmin(InputUserDto classInputUser, Roles role)
         {
             string date;
             FirstName = classInputUser.FirstName;

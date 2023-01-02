@@ -16,6 +16,7 @@ C:\Users\Deshon\source\repos\First lesson\First lesson\obj\Debug\net6.0\ref\Firs
 C:\Users\Deshon\source\repos\First lesson\First lesson\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\Deshon\source\repos\First lesson\First lesson\bin\Debug\net6.0\ZendeskApi_v2.dll
 C:\Users\Deshon\source\repos\First lesson\First lesson\obj\Debug\net6.0\First lesson.csproj.CopyComplete
+<<<<<<< HEAD
 C:\Users\Deshon\Source\Repos\CRM\First lesson\bin\Debug\net6.0\First lesson.exe
 C:\Users\Deshon\Source\Repos\CRM\First lesson\bin\Debug\net6.0\First lesson.deps.json
 C:\Users\Deshon\Source\Repos\CRM\First lesson\bin\Debug\net6.0\First lesson.runtimeconfig.json
@@ -34,3 +35,23 @@ C:\Users\Deshon\Source\Repos\CRM\First lesson\obj\Debug\net6.0\refint\First less
 C:\Users\Deshon\Source\Repos\CRM\First lesson\obj\Debug\net6.0\First lesson.pdb
 C:\Users\Deshon\Source\Repos\CRM\First lesson\obj\Debug\net6.0\First lesson.genruntimeconfig.cache
 C:\Users\Deshon\Source\Repos\CRM\First lesson\obj\Debug\net6.0\ref\First lesson.dll
+=======
+C:\Users\Deshon\Desktop\SZd\First lesson\obj\Debug\net6.0\First lesson.csproj.AssemblyReference.cache
+C:\Users\Deshon\Desktop\SZd\First lesson\obj\Debug\net6.0\First lesson.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Deshon\Desktop\SZd\First lesson\obj\Debug\net6.0\First lesson.AssemblyInfoInputs.cache
+C:\Users\Deshon\Desktop\SZd\First lesson\obj\Debug\net6.0\First lesson.AssemblyInfo.cs
+C:\Users\Deshon\Desktop\SZd\First lesson\obj\Debug\net6.0\First lesson.csproj.CoreCompileInputs.cache
+C:\Users\Deshon\Desktop\SZd\First lesson\obj\Debug\net6.0\First lesson.dll
+C:\Users\Deshon\Desktop\SZd\First lesson\obj\Debug\net6.0\refint\First lesson.dll
+C:\Users\Deshon\Desktop\SZd\First lesson\obj\Debug\net6.0\First lesson.pdb
+C:\Users\Deshon\Desktop\SZd\First lesson\bin\Debug\net6.0\First lesson.exe
+C:\Users\Deshon\Desktop\SZd\First lesson\bin\Debug\net6.0\First lesson.deps.json
+C:\Users\Deshon\Desktop\SZd\First lesson\bin\Debug\net6.0\First lesson.runtimeconfig.json
+C:\Users\Deshon\Desktop\SZd\First lesson\bin\Debug\net6.0\First lesson.dll
+C:\Users\Deshon\Desktop\SZd\First lesson\bin\Debug\net6.0\First lesson.pdb
+C:\Users\Deshon\Desktop\SZd\First lesson\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Deshon\Desktop\SZd\First lesson\bin\Debug\net6.0\ZendeskApi_v2.dll
+C:\Users\Deshon\Desktop\SZd\First lesson\obj\Debug\net6.0\First lesson.csproj.CopyComplete
+C:\Users\Deshon\Desktop\SZd\First lesson\obj\Debug\net6.0\First lesson.genruntimeconfig.cache
+C:\Users\Deshon\Desktop\SZd\First lesson\obj\Debug\net6.0\ref\First lesson.dll
+>>>>>>> 3b4a072bdf0f7eb739b0eed1c6324e3d7c22a0b9

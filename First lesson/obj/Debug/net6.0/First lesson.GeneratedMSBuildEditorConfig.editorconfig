@@ -8,4 +8,8 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = First_lesson
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\Deshon\Source\Repos\CRM\First lesson\
+=======
+build_property.ProjectDir = C:\Users\Deshon\Desktop\SZd\First lesson\
+>>>>>>> 3b4a072bdf0f7eb739b0eed1c6324e3d7c22a0b9

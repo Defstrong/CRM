@@ -1,5 +1,7 @@
 ﻿using First_lesson.CRM.Models;
-using System;
+using First_lesson.CRM.Enums;
+using First_lesson.CRM.Services;
+
 
 namespace First_lesson.CRM.Services
 {
@@ -8,17 +10,15 @@ namespace First_lesson.CRM.Services
         static string inputTeg;
         static List<User> requests = new List<User>();
         static List<User> usersList = new List<User>();
-        static List<User> refuseRequests = new List<User>();
         static List<int> indexes = new List<int>();
         public static int countAcceptRequest = 0;
         public static int countRefuseRequest = 0;
         public static string Refuse;
 
-        public static void GeneralAccessForModer(ref List<User> Requests, ref List<User> UsersList, ref List<User> RefuseRequests)
+        public ModerServices(ref List<User> Requests, ref List<User> UsersList)
         {
             requests = Requests;
             usersList = UsersList;
-            refuseRequests = RefuseRequests;
         }
         public static void ModerLogin()
         {
@@ -31,7 +31,6 @@ namespace First_lesson.CRM.Services
                 {
                     Console.WriteLine($"\t\t{i + 1})");
                     Console.WriteLine(requests[i].ToString());
-
                     Console.WriteLine("\nAccept\t\tRefuse");
                     inputTeg = Console.ReadLine();
 
@@ -39,20 +38,21 @@ namespace First_lesson.CRM.Services
                     {
                         countAcceptRequest++;
                         usersList.Add(requests[i]);
-                        indexes.Add(i);
+                        requests[i].Status = StatusUser.Accepted;
                     }
                     else if (inputTeg == "Refuse")
                     {
                         countRefuseRequest++;
                         Console.WriteLine("\t\t\tRejection reason\n");
                         Refuse = Console.ReadLine();
-                        refuseRequests.Add(requests[i]);
+                        usersList.Add(requests[i]);
+                        requests[i].Status = StatusUser.Refuse;
                         requests[i].UserStatus = Refuse;
                         indexes.Add(i);
                     }
                 }
-                for(int i = 0; i < requests.Count; i++)
-                    requests.Remove(requests[i]);
+                    for (int i = 0; i < requests.Count; i++)
+                        requests.Remove(requests[i]);
             }
         }
     }

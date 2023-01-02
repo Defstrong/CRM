@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "VLu0JSYauHN+H8nmBDZtWP7M3sCztqwXPM/P3+lTKfdUwH/EWVO8Dxcziws6UnE1PwvJGK1fs7TYCtPJSguZ3w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Deshon\\Source\\Repos\\CRM\\First lesson\\First lesson.csproj",
+=======
+  "dgSpecHash": "anv70WyXtOZFRrwSKc3FimMTPwUOydRDDC+4YBezu2LYF9iCKNNih0kKCbLKizA77lGX/Qf5txhq8oQx3vXUEg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Deshon\\Desktop\\SZd\\First lesson\\First lesson.csproj",
+>>>>>>> 3b4a072bdf0f7eb739b0eed1c6324e3d7c22a0b9
   "expectedPackageFiles": [
     "C:\\Users\\Deshon\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\Deshon\\.nuget\\packages\\zendeskapi_v2\\3.12.0\\zendeskapi_v2.3.12.0.nupkg.sha512"

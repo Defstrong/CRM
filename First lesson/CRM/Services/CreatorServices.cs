@@ -9,10 +9,11 @@ namespace First_lesson.CRM.Services
         static ClassMethods CreatorMethods = new ClassMethods();
         public static List<User> usersList = new List<User>();
 
-        public void GeneralAccessSetCreatorServices(ref List<User> UsersList)
+        public CreatorServices(ref List<User> UsersList)
         {
             usersList = UsersList;
         }
+        public CreatorServices() { }
 
         public void LoginCreator(
             string inputLogin,
