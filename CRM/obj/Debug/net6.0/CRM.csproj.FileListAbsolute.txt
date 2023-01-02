@@ -1,0 +1,15 @@
+C:\Users\Deshon\source\repos\CRM\CRM\obj\Debug\net6.0\CRM.csproj.AssemblyReference.cache
+C:\Users\Deshon\source\repos\CRM\CRM\obj\Debug\net6.0\CRM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Deshon\source\repos\CRM\CRM\obj\Debug\net6.0\CRM.AssemblyInfoInputs.cache
+C:\Users\Deshon\source\repos\CRM\CRM\obj\Debug\net6.0\CRM.AssemblyInfo.cs
+C:\Users\Deshon\source\repos\CRM\CRM\obj\Debug\net6.0\CRM.csproj.CoreCompileInputs.cache
+C:\Users\Deshon\source\repos\CRM\CRM\bin\Debug\net6.0\CRM.exe
+C:\Users\Deshon\source\repos\CRM\CRM\bin\Debug\net6.0\CRM.deps.json
+C:\Users\Deshon\source\repos\CRM\CRM\bin\Debug\net6.0\CRM.runtimeconfig.json
+C:\Users\Deshon\source\repos\CRM\CRM\bin\Debug\net6.0\CRM.dll
+C:\Users\Deshon\source\repos\CRM\CRM\bin\Debug\net6.0\CRM.pdb
+C:\Users\Deshon\source\repos\CRM\CRM\obj\Debug\net6.0\CRM.dll
+C:\Users\Deshon\source\repos\CRM\CRM\obj\Debug\net6.0\refint\CRM.dll
+C:\Users\Deshon\source\repos\CRM\CRM\obj\Debug\net6.0\CRM.pdb
+C:\Users\Deshon\source\repos\CRM\CRM\obj\Debug\net6.0\CRM.genruntimeconfig.cache
+C:\Users\Deshon\source\repos\CRM\CRM\obj\Debug\net6.0\ref\CRM.dll
