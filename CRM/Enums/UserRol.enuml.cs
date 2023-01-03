@@ -4,7 +4,6 @@
     {
         Admin,
         User,
-        Creator,
         Guest,
         Moderator,
         Manager

@@ -23,7 +23,7 @@ namespace CRM.Services
         }
         public void Registration(InputUserDto Data)
         {
-            person.Add(new Person(Data, Roles.Moderator) { Status = StatusUser.Accepted });
+            person.Add(new Person(Data, Roles.Moderator) { Status = StatusUser.Accepted , Id = Guid.NewGuid() });
         }
     }
 }

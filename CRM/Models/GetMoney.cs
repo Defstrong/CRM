@@ -6,14 +6,16 @@ namespace First_lesson.CRM.Models
 {
     public class GetMoney
     {
+        public Guid Id { get; set; }
+        public Guid IdSender { get; set; }
         public int CountMoney { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
         public StatusUser StatusDuty { get; set; } = StatusUser.Pending;
         public DateTime Payday { get; set; }
-        public string Print()
+        public override string ToString()
         {
-            return $"Name: {Name}\nAge: {Age}\nPayday: {Payday.ToString("dd.MM.yyyy")}\n{CountMoney}$";
+            return $"Name: {Name}\nAge: {Age}\nPayday: {Payday.ToString("dd.MM.yyyy")}\nAmount Money: {CountMoney}$";
         }
     }
 }

@@ -19,7 +19,7 @@ namespace CRM.Services
         }
         public void Registration(InputUserDto Data)
         {
-            person.Add(new Person(Data, Roles.User) { Status = StatusUser.Pending });
+            person.Add(new Person(Data, Roles.User) { Status = StatusUser.Pending, Id = Guid.NewGuid() }) ;
         }
 
     }

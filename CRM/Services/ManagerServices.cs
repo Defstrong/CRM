@@ -1,6 +1,4 @@
-﻿using CRM.DTO;
-using First_lesson.CRM.DTO;
-using First_lesson.CRM.Enums;
+﻿using First_lesson.CRM.Enums;
 using First_lesson.CRM.Models;
 using System;
 using System.Collections.Generic;
@@ -10,21 +8,23 @@ using System.Threading.Tasks;
 
 namespace CRM.Services
 {
-    public class CreateAdmin
+    public sealed class ManagerServices
     {
         private static List<Person> person;
         static List<GetMoney> requestsUser;
         static List<Massage> massages;
-        private static Write write = new Write();
-        public CreateAdmin(List<Person> Person, List<GetMoney> RequestsUser, List<Massage> Massages)
+        public ManagerServices(List<Person> Person, List<GetMoney> RequestsUser, List<Massage> Massages)
         {
             person = Person;
             requestsUser = RequestsUser;
             massages = Massages;
         }
-        public void Registration(InputUserDto Data)
+        public void ChoiceRequest(int idx, string choice)
         {
-            person.Add(new Person(Data, Roles.Admin) { Status = StatusUser.Accepted, Id = Guid.NewGuid()});
+            if (choice == "Accepted")
+                requestsUser[idx].StatusDuty = StatusUser.Accepted;
+            else if(choice == "Refuse")
+                requestsUser[idx].StatusDuty = StatusUser.Refuse;
         }
     }
 }

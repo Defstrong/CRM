@@ -5,6 +5,7 @@ namespace First_lesson.CRM.Models
 {
     public class Person
     {
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Patronymic { get; set; }
@@ -13,9 +14,8 @@ namespace First_lesson.CRM.Models
         public string Login { get; set; }
         public string Password { get; set; }
         public Roles Role { get; set; }
-        public string UserStatus { get; set; }
+        public string CauseRefuseRegistration { get; set; }
         public StatusUser Status { get; set; }
-        public string UserStatusDuty { get; set; }
         public Person(InputUserDto classInputUser, Roles role)
         {
             string date;
