@@ -17,5 +17,7 @@ namespace First_lesson.CRM.DTO
         public DateTime Payday { get; set; }
         public string Massage { get; set; }
         public Roles Role { get; set; }
+        public string Text { get; set; }
+        public string Theme { get; set; }
     }
 }

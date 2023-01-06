@@ -10,10 +10,9 @@ namespace First_lesson.CRM.Models
         public string Name { get; set; }
         public string Theme { get; set; }
         public string Text { get; set; }
+        public Roles Role { get; set; }
 
-        public override string ToString()
-        {
-            return $"\t\t\t{Name}\n{Text}";
-        }
+        public override string ToString() =>
+            $"Name: {Name} Theme:{Theme}";
     }
 }

@@ -84,24 +84,125 @@ while(i++ < 100)
     else if (inputCommand == "Login")
     {
         Login(ref dto); Password(ref dto);
-        Guid idUser = _autorization.Login(dto);
+        Guid idPerson = _autorization.Login(dto);
         Command(ref inputCommand);
         if (dto.Role == Roles.User)
-            UserAction(inputCommand, idUser);
+            UserAction(inputCommand, idPerson);
         else if (dto.Role == Roles.Admin)
-            AdminAction(inputCommand);
+            AdminAction(inputCommand, idPerson);
         else if (dto.Role == Roles.Moderator)
             ModeratorAction(inputCommand);
         else if (dto.Role == Roles.Manager)
-            ManagerAction(inputCommand);
+            ManagerAction(inputCommand, idPerson);
     }
 
 }
-void WriteCountStatusRequestRegistration(int count, string status)
+void UserAction(string CommandUser, Guid UserId)
 {
-    Console.WriteLine($"Count {status} registration: {count}");
+    int idx = FindIndex(UserId);
+    _managerServices.OverdueRequest();
+    dto.Id = UserId;
+    if (CommandUser == "Get money")
+    {
+        AmounMoney(); Payday();
+        _userServices.GetMoney(dto, idx);
+    }
+    else if (CommandUser == "Status dutys")
+        StatusDuty(UserId);
+    else if (CommandUser == "Personal area")
+        PersonalArea(idx);
+    else if (CommandUser == "My massages")
+        MyMassages(UserId);
+    else if (CommandUser == "Delete profile")
+        _userServices.DeleteUser(UserId);
+    else if (CommandUser == "Edit profile")
+        EditUser(UserId);
+    else if (CommandUser == "Delete duty")
+        DeleteDuty(UserId);
+    else if (CommandUser == "Send massage")
+        UserSendMassage(idx);
+    else if (CommandUser == "Debt off")
+        PayTheDebtOff(UserId);
+
+
+}
+// User Methods
+void PayTheDebtOff(Guid UserId)
+{
+    ShowAllIdUserRequestGetMoney(UserId);
+    _userServices.PayTheDebtOff(EnterIdRequestForTheDebtOff());
+}
+Guid EnterIdRequestForTheDebtOff()
+{
+    Console.Write("Please enter Id request: ");
+    Guid IdRequest = Guid.Parse(Console.ReadLine());
+
+    return IdRequest;
+}
+void ShowAllIdUserRequestGetMoney(Guid UserId)
+{
+    foreach (var ii in _personsRequestsList)
+    {
+        if (ii.IdSender == UserId && ii.StatusDuty == StatusUser.Accepted)
+        {
+            Console.WriteLine(ii.Id);
+            write.Status(ii.StatusDuty);
+            write.WriteDutys(ii.ToString());
+        }
+    }
+}
+void StatusDuty(Guid UserId)
+{
+    foreach (var ii in _personsRequestsList)
+    {
+        if (ii.IdSender == UserId && ii.StatusDuty != StatusUser.Pending)
+        {
+            write.Status(ii.StatusDuty);
+            write.WriteDutys(ii.ToString());
+        }
+    }
+}
+void PersonalArea(int idx)
+{
+    if (_personsList[idx].Status == StatusUser.Accepted)
+        Console.WriteLine(_personsList[idx].ToString());
+    else
+        throw new Exception("User is not found");
+}
+void MyMassages(Guid Id)
+{
+    ShowAllIdMassagesForUser(Id);
+    bool b = false;
+    int idx = _massages.FindIndex(x => x.IdSender.Equals(Id));
+    foreach(var ii in _massages)
+    {
+        if(ii.IdRecipient == Id)
+        {
+            Console.WriteLine(ii.ToString());
+            b = true;
+        }
+    }
+    if(b)
+        ShowMassage();
+    else
+        Console.WriteLine("\nYou dot't have massages\n");
 }
 
+void ShowMassage()
+{
+    Guid IdMassage = Guid.Parse(Console.ReadLine());
+    int idx = _massages.FindIndex(x => x.Id.Equals(IdMassage));
+    Console.WriteLine($"\n{_massages[idx].ToString()}\n{_massages[idx].Text}");
+}
+void ShowAllIdMassagesForUser(Guid Id)
+{
+    int idx = _massages.FindIndex(x => x.IdSender.Equals(Id));
+    foreach (var ii in _massages)
+    {
+        if (ii.IdRecipient == Id)
+            Console.WriteLine(ii.Id);
+    }
+}
 void EditUser(Guid Id)
 {
     int i = 0;
@@ -128,12 +229,45 @@ void EditUser(Guid Id)
     }
     _userServices.EditUser(EditUser, Id);
 }
-
-void ManagerAction(string CommandManager)
+void DeleteDuty(Guid UserId)
 {
-    if(CommandManager == "Statistic")
+    ShowMyTransaction(UserId);
+    Guid inputIdTransaction = Guid.Empty;
+    EnterId(ref inputIdTransaction);
+    _userServices.DeleteDuty(inputIdTransaction);
+}
+void UserSendMassage(int idx)
+{
+    _userServices.SendMassage(InputUserDataSendMassage(dto, idx));
+}
+InputUserDto InputUserDataSendMassage(InputUserDto DataSendMassage, int IndexUser)
+{
+    string AdminOrManager;
+    Console.Write("Who do you want to send a message to Admin or Manager: ");
+    AdminOrManager = Console.ReadLine();
+    if (AdminOrManager == "Admin")
+        DataSendMassage.Role = Roles.Admin;
+    else if (AdminOrManager == "Manager")
+        DataSendMassage.Role = Roles.Manager;
+    else
+        throw new Exception("Eror. Person is not found");
+    Console.Write("Please enter theme massage: ");
+    DataSendMassage.Theme = Console.ReadLine();
+    Console.Write("Please enter text massage: ");
+    DataSendMassage.Text = Console.ReadLine();
+    DataSendMassage.Id = _personsList[IndexUser].Id;
+    DataSendMassage.FirstName = _personsList[IndexUser].FirstName;
+    return DataSendMassage;
+}
+//
+
+
+
+void ManagerAction(string CommandManager, Guid IdManager)
+{
+    if (CommandManager == "Statistic")
         StatisticGetMoney();
-    if(CommandManager == "Requests")
+    else if (CommandManager == "Requests")
     {
         ShowUsersIdTransaction();
         ShowUsersGetMoney();
@@ -144,11 +278,70 @@ void ManagerAction(string CommandManager)
         _managerServices.ChoiceRequest(idx, Choice);
         if (Choice == "Accepted")
             _allStatistic.countAcceptedRequestGetMoney++;
-        else if(Choice == "Refuse")
+        else if (Choice == "Refuse")
             _allStatistic.countRefuseRequestGetMoney++;
     }
+    else if (CommandManager == "Send massage")
+        ManagerSendMassage();
+    else if (CommandManager == "My massages")
+        MyMassagesManager(IdManager);
+
 
 }
+//Manager Methods
+void MyMassagesManager(Guid Id)
+{
+    ShowAllIdMassagesForManager(Id);
+    bool b = false;
+    int idx = _massages.FindIndex(x => x.IdSender.Equals(Id));
+    foreach (var ii in _massages)
+    {
+        if (ii.Role == Roles.Manager)
+        {
+            Console.WriteLine(ii.ToString());
+            b = true;
+        }
+    }
+    if (b)
+        ShowMassage();
+    else
+        Console.WriteLine("\nYou don't have massage\n");
+}
+void ShowMassageManager()
+{
+    Guid IdMassage = Guid.Parse(Console.ReadLine());
+    int idx = _massages.FindIndex(x => x.Id.Equals(IdMassage));
+    Console.WriteLine($"\n{_massages[idx].ToString()}\n{_massages[idx].Text}");
+}
+void ShowAllIdMassagesForManager(Guid Id)
+{
+    int idx = _massages.FindIndex(x => x.IdSender.Equals(Id));
+    foreach (var ii in _massages)
+    {
+        if (ii.Role == Roles.Manager)
+            Console.WriteLine(ii.Id);
+    }
+}
+void StatisticGetMoney()
+{
+    Console.WriteLine("Accepted Request: " + _allStatistic.countAcceptedRequestGetMoney);
+    Console.WriteLine("Refuse Request: " + _allStatistic.countRefuseRequestGetMoney);
+}
+void ShowUsersGetMoney()
+{
+    foreach (var ii in _personsRequestsList)
+    {
+        if (ii.StatusDuty == StatusUser.Pending)
+            Console.WriteLine(ii.ToString());
+    }
+}
+void ManagerSendMassage()
+{
+    _managerServices.SendMassage(InputDataSendMassageForUser(dto));
+}
+//
+
+
 
 void ModeratorAction(string CommandAdmin)
 {
@@ -172,126 +365,7 @@ void ModeratorAction(string CommandAdmin)
             _allStatistic.countAcceptedRequestRegistration++;
     }
 }
-
-void StatisticGetMoney()
-{
-    Console.WriteLine("Accepted Request: " + _allStatistic.countAcceptedRequestGetMoney);
-    Console.WriteLine("Accepted Request: " + _allStatistic.countRefuseRequestGetMoney);
-}
-
-void UserAction(string CommandUser, Guid UserId)
-{
-    int idx = FindIndex(UserId);
-    dto.Id = UserId;
-    if (CommandUser == "Get money")
-    {
-        AmounMoney(); Payday();
-        _userServices.GetMoney(dto, idx);
-    }
-    else if (CommandUser == "Status dutys")
-    {
-        foreach (var ii in _personsRequestsList)
-        {
-            if (ii.IdSender == UserId && ii.StatusDuty != StatusUser.Pending)
-            {
-                write.Status(ii.StatusDuty);
-                write.WriteDutys(ii.ToString());
-            }
-        }
-    }
-    else if (CommandUser == "Personal area")
-        PersonalArea(idx);
-    else if (CommandUser == "My massages")
-        MyMassages(UserId);
-    else if (CommandUser == "Delete profile")
-        _userServices.DeleteUser(UserId);
-    else if (CommandUser == "Edit profile")
-        EditUser(UserId);
-    else if (CommandUser == "Delete duty")
-        DeleteDuty(UserId);
-
-
-}
-
-void DeleteDuty(Guid UserId)
-{
-    ShowMyTransaction(UserId);
-    Guid inputIdTransaction = Guid.Empty;
-    EnterId(ref inputIdTransaction);
-    _userServices.DeleteDuty(inputIdTransaction);
-}
-
-string СauseRefusalOfRegistration(string Сause)
-{
-    Console.Write("Enter your cause: ");
-    Сause = Console.ReadLine();
-
-    return Сause;
-}
-string СauseRefusalOfDuty(string Сause)
-{
-    Console.Write("Enter your cause: ");
-    Сause = Console.ReadLine();
-    return Сause;
-}
-
-void ShowMyTransaction(Guid Id)
-{
-    foreach (var ii in _personsRequestsList)
-    {
-        if (ii.IdSender == Id)
-            Console.WriteLine($"Name: {ii.Name} - Id Transaction: {ii.Id}");
-    }
-}
-
-void AdminAction(string CommandAdmin)
-{
-    if(CommandAdmin == "Show user")
-    {
-        ShowAllUsersId(_personsList, StatusUser.Accepted);
-        Guid IdUser = new Guid();
-        EnterId(ref IdUser);
-        int idxUser = FindIndex(IdUser);
-        ShowUser(idxUser);
-    }
-    else if(CommandAdmin == "Show users")
-        ShowUsers(StatusUser.Accepted);
-}
-
-void ShowUsersGetMoney()
-{
-    foreach (var ii in _personsRequestsList)
-    {
-        if (ii.StatusDuty == StatusUser.Pending)
-            Console.WriteLine(ii.ToString());
-    }
-}
-
-void ShowUsers(StatusUser Status)
-{
-    foreach(var ii in _personsList)
-    {
-        if (ii.Role == Roles.User && ii.Status == Status)
-            Console.WriteLine(ii.ToString());
-    }
-}
-
-
-void ShowAllUserIdGetMoney()
-{
-    bool presence = false;
-    for (int i = 0; i < _personsRequestsList.Count; i++)
-    {
-        if (_personsRequestsList[i].StatusDuty == StatusUser.Pending)
-        {
-            Console.WriteLine($"Name: {_personsRequestsList[i].Name} - Id: {_personsRequestsList[i].Id}");
-            presence = true;
-        }
-    }
-    if (!presence)
-        throw new Exception("You don't have requests");
-}
-
+//Moderator Methods
 void ShowAllUsersId<T>(List<T> PersonsId, StatusUser Status) where T : Person
 {
     bool presence = false;
@@ -306,19 +380,144 @@ void ShowAllUsersId<T>(List<T> PersonsId, StatusUser Status) where T : Person
     if (!presence)
         throw new Exception("You don't have requests");
 }
-void MyMassages(Guid Id)
+//
+
+
+
+void AdminAction(string CommandAdmin, Guid Id)
+{
+    if (CommandAdmin == "Show user")
+    {
+        ShowAllUsersId(_personsList, StatusUser.Accepted);
+        Guid IdUser = new Guid();
+        EnterId(ref IdUser);
+        int idxUser = FindIndex(IdUser);
+        ShowUser(idxUser);
+    }
+    else if (CommandAdmin == "Show users")
+        ShowUsers(StatusUser.Accepted);
+    else if (CommandAdmin == "Send massage")
+        AdminSendMassage();
+    else if (CommandAdmin == "My massages")
+        MyMassagesAdmin(Id);
+}
+//Admin Methods
+void MyMassagesAdmin(Guid Id)
+{
+    ShowAllIdMassagesForAdmin(Id);
+    bool b = false;
+    int idx = _massages.FindIndex(x => x.IdSender.Equals(Id));
+    foreach (var ii in _massages)
+    {
+        if (ii.Role == Roles.Admin)
+        {
+            Console.WriteLine(ii.ToString());
+            b = true;
+        }
+    }
+    if (b)
+        ShowMassage();
+    else
+        Console.WriteLine("\nYou don't have massage\n");
+}
+void ShowMassageAdmin()
+{
+    Guid IdMassage = Guid.Parse(Console.ReadLine());
+    int idx = _massages.FindIndex(x => x.Id.Equals(IdMassage));
+    Console.WriteLine($"\n{_massages[idx].ToString()}\n{_massages[idx].Text}");
+}
+void ShowAllIdMassagesForAdmin(Guid Id)
 {
     int idx = _massages.FindIndex(x => x.IdSender.Equals(Id));
-    foreach(var ii in _massages)
+    foreach (var ii in _massages)
     {
-        if(ii.IdRecipient == Id)
-            Console.WriteLine(ii.ToString());
+        if (ii.Role == Roles.Admin)
+            Console.WriteLine(ii.Id);
     }
-
+}
+void EnterId(ref Guid Id)
+{
+    Id = Guid.Parse(Console.ReadLine());
 }
 void ShowUser(int idx)
 {
     Console.WriteLine(_personsList[idx].ToString());
+}
+void ShowUsers(StatusUser Status)
+{
+    foreach(var ii in _personsList)
+    {
+        if (ii.Role == Roles.User && ii.Status == Status)
+            Console.WriteLine(ii.ToString());
+    }
+}
+void AdminSendMassage()
+{
+    _adminServices.SendMassage(InputDataSendMassageForUser(dto));
+}
+
+
+
+/////////////////
+
+InputUserDto InputDataSendMassageForUser(InputUserDto DataSendMassage)
+{
+    ShowAllUserId();
+    string EnterUserId;
+    Console.Write("Enter user Id: ");
+    EnterUserId = Console.ReadLine();
+    Console.Write("Please enter theme massage: ");
+    DataSendMassage.Theme = Console.ReadLine();
+    Console.Write("Please enter text massage: ");
+    DataSendMassage.Text = Console.ReadLine();
+    DataSendMassage.Id = Guid.Parse(EnterUserId);
+    return DataSendMassage;
+}
+void ShowAllUserId()
+{
+    for (int i = 0; i < _personsList.Count; i++)
+        if (_personsList[i].Status == StatusUser.Accepted && _personsList[i].Role == Roles.User)
+            Console.WriteLine($"Name: {_personsList[i].FirstName} - Id: {_personsList[i].Id}");
+}
+
+void WriteCountStatusRequestRegistration(int count, string status)
+{
+    Console.WriteLine($"Count {status} registration: {count}");
+}
+string СauseRefusalOfRegistration(string Сause)
+{
+    Console.Write("Enter your cause: ");
+    Сause = Console.ReadLine();
+
+    return Сause;
+}
+string СauseRefusalOfDuty(string Сause)
+{
+    Console.Write("Enter your cause: ");
+    Сause = Console.ReadLine();
+    return Сause;
+}
+void ShowMyTransaction(Guid Id)
+{
+    foreach (var ii in _personsRequestsList)
+    {
+        if (ii.IdSender == Id)
+            Console.WriteLine($"Name: {ii.Name} - Id Transaction: {ii.Id}");
+    }
+}
+void ShowAllUserIdGetMoney()
+{
+    bool presence = false;
+    for (int i = 0; i < _personsRequestsList.Count; i++)
+    {
+        if (_personsRequestsList[i].StatusDuty == StatusUser.Pending)
+        {
+            Console.WriteLine($"Name: {_personsRequestsList[i].Name} - Id: {_personsRequestsList[i].Id}");
+            presence = true;
+        }
+    }
+    if (!presence)
+        throw new Exception("You don't have requests");
 }
 void Registration()
 {
@@ -340,13 +539,6 @@ void CreateModerator()
     Patronymic(ref dto); DateOfBirth(ref dto);
     Login(ref dto); Password(ref dto);
     _createModerator.Registration(dto);
-}
-void PersonalArea(int idx)
-{
-    if (_personsList[idx].Status == StatusUser.Accepted)
-        Console.WriteLine(_personsList[idx].ToString());
-    else
-        throw new Exception("User is not found");
 }
 void FirstName(ref InputUserDto inputUserDtoFirstName)
 {
@@ -394,27 +586,10 @@ string Command(ref string command)
     command = Console.ReadLine();
     return command;
 }
-/*void SendMassage(ref Massage sendMassage)
-{
-    Console.Write("Enter your massage: ");
-    sendMassage.SendMassage = Console.ReadLine();
-    Console.Write("Enter theme massage: ");
-    sendMassage.Theme = Console.ReadLine();
-    Console.Write("Recipient: ");
-    string role = Console.ReadLine();
-    if (role == "Admin")
-        sendMassage.Recipient = Roles.Admin;
-    else if (role == "Moderator")
-        sendMassage.Recipient = Roles.Moderator;
-}*/
 int FindIndex(Guid Id)
 {
     int idx = _personsList.FindIndex(x => x.Id.Equals(Id));
     return idx;
-}
-void EnterId(ref Guid Id)
-{
-    Id = Guid.Parse(Console.ReadLine());
 }
 string EnterAnother(ref string another, string change)
 {
@@ -423,7 +598,6 @@ string EnterAnother(ref string another, string change)
     Console.WriteLine();
     return another;
 }
-
 void ShowUsersIdTransaction()
 {
     foreach(var ii in _personsRequestsList)

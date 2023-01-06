@@ -1,4 +1,6 @@
-﻿using First_lesson.CRM.Models;
+﻿using First_lesson.CRM.DTO;
+using First_lesson.CRM.Enums;
+using First_lesson.CRM.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +20,18 @@ namespace CRM.Services
             requestsUser = RequestsUser;
             massages = Massages;
         }
-
+        public void SendMassage(InputUserDto MassageInformation)
+        {
+            massages.Add(new Massage
+            {
+                Id = Guid.NewGuid(),
+                Name = "Admin",
+                IdRecipient = MassageInformation.Id,
+                Role = Roles.User,
+                Text = MassageInformation.Text,
+                Theme = MassageInformation.Theme
+            }) ;
+        }
 
     }
 }

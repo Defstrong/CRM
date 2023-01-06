@@ -57,5 +57,24 @@ namespace CRM.Services
             int idx = requestsUser.FindIndex(x => x.Id.Equals(IdTransaction));
             requestsUser.Remove(requestsUser[idx]);
         }
+
+        public void SendMassage(InputUserDto MassageInformation)
+        {
+            massages.Add(new Massage {
+                Id = Guid.NewGuid(),
+                Name = MassageInformation.FirstName,
+                Role = MassageInformation.Role,
+                IdSender = MassageInformation.Id,
+                Text = MassageInformation.Text,
+                Theme = MassageInformation.Theme }) ;
+        }
+        public void PayTheDebtOff(Guid Id)
+        {
+            int idx = requestsUser.FindIndex(x => x.Id.Equals(Id));
+            if (idx != -1)
+                requestsUser.Remove(requestsUser[idx]);
+            else
+                throw new Exception("Request is not found");
+        }
     }
 }
